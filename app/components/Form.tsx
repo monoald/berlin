@@ -2,14 +2,14 @@
 
 import { FormEvent } from 'react'
 
-export default function Form() {
+export default function Form({ transformUrlToCode }: { transformUrlToCode: (url: string) => void }) {
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
 		const form = e.currentTarget as HTMLFormElement
 		const url = form.elements.namedItem('url') as HTMLInputElement
 
-		console.log(url.value)
+		transformUrlToCode(url.value)
 	}
 
 	return (
