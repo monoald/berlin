@@ -6,9 +6,6 @@
 	--foreground-rgb: 0, 0, 0;
 	--background-start-rgb: 214, 219, 220;
 	--background-end-rgb: 255, 255, 255;
-
-	--bg-color: rgba(255, 255, 255, 0.1);
-	--card-color: rgb(13, 13, 13);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,39 +21,61 @@ body {
 	background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
-#cards:hover > .card::after {
+* {
+	text-wrap: pretty;
+}
+
+#cards .glow::after {
 	opacity: 1;
 }
 
-.card {
-	@apply relative text-white w-64 h-64 rounded-lg flex flex-col items-center gap-12 text-center bg-neutral-800 hover:before:opacity-100;
+.glow {
+	@apply relative text-white rounded-lg flex flex-col justify-center items-center gap-12 text-center bg-neutral-800 hover:before:opacity-100;
 }
-.card::before,
-.card::after {
-	@apply absolute h-full w-full rounded-lg content-[''] opacity-0;
+.card {
+	@apply w-64 h-64;
+}
+.glow::before,
+.glow::after {
+	@apply absolute h-full w-full rounded-lg content-[''] opacity-0 pointer-events-none;
 	transition: opacity 500ms;
 }
-
-.card::before {
-	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), #fe6f1615, transparent 40%);
-	z-index: 2;
+.glow::before {
+	@apply z-[2];
 }
-
+.card::before {
+	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), #fe6f161a, transparent 40%);
+}
 .card::after {
 	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), #fe6f16, transparent 40%);
 	z-index: 0;
 }
+.button::before {
+	background: radial-gradient(200px circle at var(--mouse-x) var(--mouse-y), #fe6f161a, transparent 40%);
+	z-index: 2;
+}
+.button::after {
+	background: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), #fe6f16, transparent 40%);
+	z-index: 0;
+}
+.faq::before {
+	background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), #fe6f161a, transparent 40%);
+	z-index: 2;
+}
+.faq::after {
+	background: radial-gradient(300px circle at var(--mouse-x) var(--mouse-y), #fe6f16, transparent 40%);
+	z-index: 0;
+}
 
-.card > .card-content {
-	@apply absolute rounded-lg z-[1];
-	background-color: var(--card-color);
-	inset: 1px;
+.glow > .glow-content {
+	@apply rounded-lg z-[1] bg-[#0d0d0d] inset-[1px];
+	width: calc(100% - 2px);
+	height: calc(100% - 2px);
 }
 .card-info-wrapper {
 	@apply text-neutral-300 p-8 flex flex-col justify-center items-center gap-10;
 }
 
 .hidden:checked + p {
-	/* display: block; */
-	@apply h-fit mt-8 text-opacity-100;
+	@apply h-fit mt-8 p-5 text-opacity-100;
 }

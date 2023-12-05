@@ -6,7 +6,7 @@ import Faq from './components/Faq'
 
 export default function Home() {
 	const handleMouseMove = (e: MouseEvent<HTMLElement, globalThis.MouseEvent>) => {
-		const cards = document.getElementsByClassName('card') as HTMLCollectionOf<HTMLElement>
+		const cards = document.getElementsByClassName('glow') as HTMLCollectionOf<HTMLElement>
 
 		for (const card of cards) {
 			const rect = card.getBoundingClientRect()
@@ -21,7 +21,7 @@ export default function Home() {
 	return (
 		<>
 			<Header />
-			<main className="w-full max-w-6xl px-8 mx-auto">
+			<main id="cards" onMouseMove={handleMouseMove} className="w-full max-w-6xl px-8 mx-auto">
 				<Image
 					className="absolute top-10 right-2/4 translate-x-2/4 mx-auto"
 					src="/berlin.png"
@@ -38,8 +38,8 @@ export default function Home() {
 							No coding needed. Just upload an image, and watch it become a fully functional app. Easy, fast, and
 							hassle-free app development for everyone.
 						</p>
-						<button className="w-fit px-5 py-2 border rounded-lg border-neutral-800 text-sm hover:border-primary hover:text-primary bg-[rgb(255,255,255,0.05)]">
-							Try For Free
+						<button className="glow w-32 h-10 button">
+							<div className="glow-content flex items-center justify-center text-sm">Try For Free</div>
 						</button>
 					</div>
 
@@ -53,11 +53,11 @@ export default function Home() {
 					</div>
 				</section>
 
-				<section className="text-center" onMouseMove={handleMouseMove}>
+				<section className="text-center">
 					<h2 className="text-3xl font-bold">How it works?</h2>
-					<div id="cards" className="h-fit w-full my-24 flex justify-center gap-6">
-						<div className="card">
-							<div className="card-content">
+					<div className="h-fit w-full my-24 flex justify-center gap-6">
+						<div className="glow card">
+							<div className="glow-content">
 								<div className="card-info-wrapper">
 									<svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path
@@ -77,8 +77,8 @@ export default function Home() {
 								</div>
 							</div>
 						</div>
-						<div className="card">
-							<div className="card-content">
+						<div className="glow card">
+							<div className="glow-content">
 								<div className="card-info-wrapper">
 									<svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path
@@ -90,8 +90,8 @@ export default function Home() {
 								</div>
 							</div>
 						</div>
-						<div className="card">
-							<div className="card-content">
+						<div className="glow card">
+							<div className="glow-content">
 								<div className="card-info-wrapper">
 									<svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path
@@ -123,7 +123,7 @@ export default function Home() {
 				<section>
 					<h2 className="text-3xl text-center font-bold">Frequently Asked Questions</h2>
 
-					<ul className="w-screen max-w-xl my-24 mx-auto flex flex-col gap-6">
+					<ul className="w-screen max-w-lg my-24 mx-auto flex flex-col gap-6">
 						<Faq
 							question="How many free credits I have?"
 							answer="You will have 10 free credits that will be refreshed each month."
