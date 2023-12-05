@@ -3,25 +3,60 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
+
+	--bg-color: rgba(255, 255, 255, 0.1);
+	--card-color: rgb(13, 13, 13);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+	:root {
+		--foreground-rgb: 255, 255, 255;
+		--background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0;
+	}
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	color: rgb(var(--foreground-rgb));
+	background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+#cards:hover > .card::after {
+	opacity: 1;
+}
+
+.card {
+	@apply relative text-white w-64 h-64 rounded-lg flex flex-col items-center gap-12 text-center bg-neutral-800 hover:before:opacity-100;
+}
+.card::before,
+.card::after {
+	@apply absolute h-full w-full rounded-lg content-[''] opacity-0;
+	transition: opacity 500ms;
+}
+
+.card::before {
+	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), #fe6f1615, transparent 40%);
+	z-index: 2;
+}
+
+.card::after {
+	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), #fe6f16, transparent 40%);
+	z-index: 0;
+}
+
+.card > .card-content {
+	@apply absolute rounded-lg z-[1];
+	background-color: var(--card-color);
+	inset: 1px;
+}
+.card-info-wrapper {
+	@apply text-neutral-300 p-8 flex flex-col justify-center items-center gap-10;
+}
+
+.hidden:checked + p {
+	/* display: block; */
+	@apply h-fit mt-8 text-opacity-100;
 }
