@@ -33,7 +33,7 @@ body {
 	@apply relative text-white rounded-lg flex flex-col justify-center items-center gap-12 text-center bg-neutral-800 hover:before:opacity-100;
 }
 .card {
-	@apply w-64 h-64;
+	@apply w-52 h-52;
 }
 .glow::before,
 .glow::after {
@@ -73,9 +73,9 @@ body {
 	height: calc(100% - 2px);
 }
 .card-info-wrapper {
-	@apply text-neutral-300 p-8 flex flex-col justify-center items-center gap-10;
+	@apply w-full h-full text-neutral-300 p-8 flex flex-col justify-center items-center gap-10;
 }
 
 .hidden:checked + p {
-	@apply h-fit mt-8 p-5 text-opacity-100;
+	@apply h-fit p-5 text-opacity-100;
 }

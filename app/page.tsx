@@ -34,7 +34,7 @@ export default function Home() {
 					<span className="absolute top-3/4 right-0 z-[-2] will-change-transform shadow-[0_0px_120px_105px_#fe6f16]" />
 					<div className="flex flex-col gap-10">
 						<h1 className="w-auto text-6xl font-bold">Build your dream app with just an image!</h1>
-						<p className="text-md text-neutral-500">
+						<p className="text-lg text-neutral-500">
 							No coding needed. Just upload an image, and watch it become a fully functional app. Easy, fast, and
 							hassle-free app development for everyone.
 						</p>
@@ -117,6 +117,30 @@ export default function Home() {
 								</div>
 							</div>
 						</div>
+					</div>
+				</section>
+
+				<section className="h-fit py-32 flex justify-evenly items-center gap-32">
+					<div className="w-full max-w-md flex flex-col gap-10">
+						<h2 className="text-3xl font-bold">Build Products Faster</h2>
+						<p className="text-lg text-neutral-500">
+							Save the time you spend creating those boring layouts and focus on what&apos;s important.
+						</p>
+					</div>
+					<figure className="relative before:absolute before:w-1 before:h-1 before:top-3/4 before:left-1/4 before:shadow-[0_0px_80px_65px_#fe6f16] before:z-[-2]">
+						<Image src="/rocket.webp" alt="rocket" width={300} height={300} />
+					</figure>
+				</section>
+
+				<section className="h-fit py-32 flex justify-evenly items-center gap-32">
+					<figure className="relative before:absolute before:w-1 before:h-1 before:top-1/4 before:left-2/4 before:shadow-[0_0px_180px_65px_#fe6f16] before:z-[-2]">
+						<Image className="rotate-180" src="/light-bulb.webp" alt="rocket" width={250} height={250} />
+					</figure>
+					<div className="w-full max-w-md flex flex-col gap-10">
+						<h2 className="text-3xl font-bold">Don&apos;t Know About Design?</h2>
+						<p className="text-lg text-neutral-500">
+							Don&apos;t worry! With Berlin&apos;s help, you will build products with an amazing UI.
+						</p>
 					</div>
 				</section>
 
