@@ -44,10 +44,17 @@ body {
 	@apply z-[2];
 }
 .card::before {
-	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), #fe6f161a, transparent 40%);
+	background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), #fe6f161a, transparent 40%);
 }
 .card::after {
-	background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), #fe6f16, transparent 40%);
+	background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), #fe6f16, transparent 40%);
+	z-index: 0;
+}
+.header::before {
+	background: radial-gradient(200px circle at var(--mouse-x) var(--mouse-y), #fe6f161a, transparent 40%);
+}
+.header::after {
+	background: radial-gradient(200px circle at var(--mouse-x) var(--mouse-y), #fe6f16, transparent 40%);
 	z-index: 0;
 }
 .button::before {
@@ -73,7 +80,7 @@ body {
 	height: calc(100% - 2px);
 }
 .card-info-wrapper {
-	@apply w-full h-full text-neutral-300 p-8 flex flex-col justify-center items-center gap-10;
+	@apply w-full h-full text-neutral-300 px-8 flex flex-col justify-center items-center gap-10;
 }
 
 .hidden:checked + p {
