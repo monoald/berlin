@@ -86,3 +86,10 @@ body {
 .hidden:checked + p {
 	@apply h-fit p-5 text-opacity-100;
 }
+
+.test:-moz-drag-over {
+	border: 2px solid dashed #fe6f16 !important;
+}
+:checked + .filter {
+	@apply border-primary bg-[rgba(254,111,22,0.05)];
+}

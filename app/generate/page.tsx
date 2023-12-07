@@ -1,7 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import Form from '../components/Form'
+import Form from './components/Form'
+import Image from 'next/image'
+import MultiCheck from './components/MultiCheck'
 
 const STEPS = {
 	INITIAL: 'INITIAL',
@@ -37,11 +39,6 @@ export default function Generate() {
 	const [result, setResult] = useState('')
 	const [step, setStep] = useState(STEPS.INITIAL)
 
-	const transformImageToCode = async (file: File) => {
-		const img = await toBase64(file)
-		transformToCode(JSON.stringify({ img }))
-	}
-
 	const transformToCode = async (body: string) => {
 		setStep(STEPS.LOADING)
 		const res = await fetch('api/generate-code-from-image', {
@@ -64,24 +61,26 @@ export default function Generate() {
 		}
 	}
 
+	const transformImageToCode = async (file: File) => {
+		const img = await toBase64(file)
+		transformToCode(JSON.stringify({ img }))
+	}
+
 	const transformUrlToCode = async (url: string) => {
 		transformToCode(JSON.stringify({ url }))
 	}
 
 	return (
-		<div className="grid grid-cols-[400px_1fr]">
-			<aside className="flex flex-col justify-between min-h-screen p-4 bg-gray-900">
-				<header>
-					<h1 className="text-3xl font-semibold">Berlin</h1>
-					<h2 className="text-sm opacity-75">Image to code in seconds</h2>
+		<div className="grid grid-cols-[282px_1fr]">
+			<aside className="relative min-h-screen p-6 flex flex-col items-center gap-5 bg-[#0d0d0d] rounded-lg border border-neutral-800">
+				<header className="w-full pb-6 text-center border-b border-b-neutral-600">
+					<h1 className="mb-2 text-3xl font-semibold">
+						<Image className="mx-auto" src="/berlin.png" alt="logo" width={120} height={80} />
+					</h1>
+					<h2 className="text-md text-neutral-400">Image to code</h2>
 				</header>
 
-				<section>Filters...</section>
-				<footer>Built by monoald with</footer>
-			</aside>
-
-			<main className="bg-gray-950">
-				<section className="max-w-5xl w-full mx-auto p-10">
+				<section className="max-w-5xl w-full mx-auto">
 					{step === STEPS.LOADING && (
 						<div className="flex justify-center items-center">
 							<h3>LOADING.....</h3>
@@ -99,7 +98,11 @@ export default function Generate() {
 						</div>
 					)}
 				</section>
-			</main>
+
+				<footer className="absolute bottom-6 text-neutral-500">Built by monoald with 🧡</footer>
+			</aside>
+
+			<main className="bg-[#030301]"></main>
 		</div>
 	)
 }
