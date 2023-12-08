@@ -1,27 +1,23 @@
-import { Metadata } from 'next'
+'use client'
+import { signIn } from 'next-auth/react'
 import Image from 'next/image'
-
-export const metadata: Metadata = {
-	title: 'Login',
-	description: 'Login to Berlin, the AI app where you can convert images to code.',
-}
 
 export default function Login() {
 	return (
 		<>
-			<div className="w-3/5 h-full grid place-items-center ">
-				<Image src="/astronaut-moon.webp" alt="astronaut" width={260} height={400} />
+			<div className="w-2/4 h-full grid place-items-center ">
+				<Image src="/astronaut-moon.webp" alt="astronaut" width={240} height={380} />
 			</div>
-			<div className="flex flex-col justify-center items-center w-2/5 h-full border border-neutral-800 rounded-lg bg-[rgba(255,255,255,0.05)]">
+			<div className="flex flex-col justify-center items-center w-2/4 h-full border border-neutral-800 rounded-lg bg-[rgba(255,255,255,0.05)]">
 				<div className="flex flex-col justify-center items-center gap-4">
-					<figure>
-						<Image src="/berlin.png" alt="logo" width={100} height={70} />
+					<figure className="mb-8">
+						<Image src="/berlin.png" alt="logo" width={140} height={90} />
 					</figure>
 					<h2 className="text-3xl font-bold">Welcome Back!</h2>
-					<p className="text-sm text-neutral-400">Please enter your user details</p>
+					<p className="text-sm text-neutral-400">Select your login method</p>
 				</div>
 
-				<form className="flex flex-col gap-6 mt-8 mb-8">
+				{/* <form className="flex flex-col gap-6 mt-8 mb-8">
 					<label className="flex flex-col gap-2 font-semibold" htmlFor="email">
 						Email
 						<input
@@ -47,50 +43,22 @@ export default function Login() {
 					</a>
 
 					<button
+					onClick={() => signIn('credentials', {
+
+					})}
 						className="w-full py-2 mx-auto rounded-lg bg-primary text-neutral-800 font-semibold tracking-normal"
 						type="submit"
 					>
 						Log In
 					</button>
-				</form>
+				</form> */}
 
-				<div className="w-full flex justify-center gap-4">
-					<button className="p-4 border rounded-full border-neutral-800 flex justify-center items-center gap-4 hover:border-primary">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<g clipPath="url(#clip0_220_287)">
-								<path
-									fillRule="evenodd"
-									clipRule="evenodd"
-									d="M23.52 12.2727C23.52 11.4218 23.4436 10.6036 23.3018 9.8182H12V14.46H18.4582C18.18 15.96 17.3345 17.2309 16.0636 18.0818V21.0927H19.9418C22.2109 19.0037 23.52 15.9273 23.52 12.2727Z"
-									fill="#4285F4"
-								/>
-								<path
-									fillRule="evenodd"
-									clipRule="evenodd"
-									d="M12 24C15.24 24 17.9564 22.9254 19.9418 21.0927L16.0636 18.0818C14.9891 18.8018 13.6145 19.2273 12 19.2273C8.87455 19.2273 6.22909 17.1164 5.28546 14.28H1.27637V17.3891C3.25091 21.3109 7.30909 24 12 24Z"
-									fill="#34A853"
-								/>
-								<path
-									fillRule="evenodd"
-									clipRule="evenodd"
-									d="M5.28545 14.28C5.04545 13.56 4.90909 12.7909 4.90909 12C4.90909 11.2091 5.04545 10.44 5.28545 9.72001V6.61092H1.27636C0.463636 8.23092 0 10.0636 0 12C0 13.9364 0.463636 15.7691 1.27636 17.3891L5.28545 14.28Z"
-									fill="#FBBC05"
-								/>
-								<path
-									fillRule="evenodd"
-									clipRule="evenodd"
-									d="M12 4.77273C13.7618 4.77273 15.3436 5.37818 16.5873 6.56727L20.0291 3.12545C17.9509 1.18909 15.2345 0 12 0C7.30909 0 3.25091 2.68909 1.27637 6.61091L5.28546 9.72C6.22909 6.88364 8.87455 4.77273 12 4.77273Z"
-									fill="#EA4335"
-								/>
-							</g>
-							<defs>
-								<clipPath id="clip0_220_287">
-									<rect width="24" height="24" rx="6" fill="white" />
-								</clipPath>
-							</defs>
-						</svg>
-					</button>
-					<button className="p-4 border rounded-full border-neutral-800 flex justify-center items-center gap-4 hover:border-primary">
+				<div className="w-full my-12 flex flex-col justify-center gap-4">
+					<button
+						onClick={() => signIn('github')}
+						className="w-64 py-[10px] px-8 mx-auto border rounded-lg border-neutral-800 grid grid-cols-[1fr,24px] place-items-start gap-4 bg-[#0D1117]"
+					>
+						Login with Github
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g clipPath="url(#clip0_220_285)">
 								<path
@@ -135,14 +103,80 @@ export default function Login() {
 							</defs>
 						</svg>
 					</button>
+					<button
+						onClick={() => signIn('google')}
+						className="w-64 py-[10px] px-8 mx-auto border rounded-lg border-neutral-800 grid grid-cols-[1fr,24px] place-items-start gap-4 bg-neutral-200 text-neutral-900"
+					>
+						Login with Google
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<g clipPath="url(#clip0_220_287)">
+								<path
+									fillRule="evenodd"
+									clipRule="evenodd"
+									d="M23.52 12.2727C23.52 11.4218 23.4436 10.6036 23.3018 9.8182H12V14.46H18.4582C18.18 15.96 17.3345 17.2309 16.0636 18.0818V21.0927H19.9418C22.2109 19.0037 23.52 15.9273 23.52 12.2727Z"
+									fill="#4285F4"
+								/>
+								<path
+									fillRule="evenodd"
+									clipRule="evenodd"
+									d="M12 24C15.24 24 17.9564 22.9254 19.9418 21.0927L16.0636 18.0818C14.9891 18.8018 13.6145 19.2273 12 19.2273C8.87455 19.2273 6.22909 17.1164 5.28546 14.28H1.27637V17.3891C3.25091 21.3109 7.30909 24 12 24Z"
+									fill="#34A853"
+								/>
+								<path
+									fillRule="evenodd"
+									clipRule="evenodd"
+									d="M5.28545 14.28C5.04545 13.56 4.90909 12.7909 4.90909 12C4.90909 11.2091 5.04545 10.44 5.28545 9.72001V6.61092H1.27636C0.463636 8.23092 0 10.0636 0 12C0 13.9364 0.463636 15.7691 1.27636 17.3891L5.28545 14.28Z"
+									fill="#FBBC05"
+								/>
+								<path
+									fillRule="evenodd"
+									clipRule="evenodd"
+									d="M12 4.77273C13.7618 4.77273 15.3436 5.37818 16.5873 6.56727L20.0291 3.12545C17.9509 1.18909 15.2345 0 12 0C7.30909 0 3.25091 2.68909 1.27637 6.61091L5.28546 9.72C6.22909 6.88364 8.87455 4.77273 12 4.77273Z"
+									fill="#EA4335"
+								/>
+							</g>
+							<defs>
+								<clipPath id="clip0_220_287">
+									<rect width="24" height="24" rx="6" fill="white" />
+								</clipPath>
+							</defs>
+						</svg>
+					</button>
+					<button
+						onClick={() => signIn('twitter')}
+						className="w-64 py-[10px] px-8 mx-auto border rounded-lg border-neutral-800 grid grid-cols-[1fr,24px] place-items-start gap-4 bg-[#000000]"
+					>
+						Login with X
+						<svg
+							width="24"
+							height="24"
+							viewBox="0 0 49 50"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+							data-astro-cid-j7pv25f6=""
+						>
+							<g clip-path="url(#clip0_211_275)" data-astro-cid-j7pv25f6="">
+								<path
+									d="M29.102 21.1607L47.306 0H42.9923L27.1857 18.3736L14.561 0H0L19.091 27.7841L0 49.9743H4.31402L21.0062 30.5712L34.3387 49.9743H48.8998L29.1009 21.1607H29.102ZM23.1934 28.0289L21.259 25.2622L5.86842 3.24751H12.4945L24.9149 21.0141L26.8492 23.7807L42.9943 46.8745H36.3682L23.1934 28.0299V28.0289Z"
+									fill="currentColor"
+									data-astro-cid-j7pv25f6=""
+								></path>
+							</g>
+							<defs data-astro-cid-j7pv25f6="">
+								<clipPath id="clip0_211_275" data-astro-cid-j7pv25f6="">
+									<rect width="50" height="50" fill="currentColor" data-astro-cid-j7pv25f6=""></rect>
+								</clipPath>
+							</defs>
+						</svg>
+					</button>
 				</div>
 
-				<p className="text-xs text-neutral-400 mt-6">
+				{/* <p className="text-xs text-neutral-400">
 					Don&apos;t have an account?{' '}
 					<a href="" className="hover:text-primary">
 						Sign Up
 					</a>
-				</p>
+				</p> */}
 			</div>
 		</>
 	)

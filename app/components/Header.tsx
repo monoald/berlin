@@ -1,4 +1,8 @@
-export default function Header() {
+import { getServerSession } from 'next-auth'
+import { options } from '../api/auth/[...nextauth]/options'
+
+export default async function Header() {
+	const session = await getServerSession(options)
 	return (
 		<header className="fixed bottom-6 w-full h-fit z-10">
 			<nav className="glow header max-w-fit h-20 mx-auto">
@@ -80,7 +84,7 @@ export default function Header() {
 									strokeWidth="1.5"
 								/>
 							</svg>
-							Login
+							{session ? 'Login' : 'Logout'}
 						</a>
 					</li>
 				</ul>
