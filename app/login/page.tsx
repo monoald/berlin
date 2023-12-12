@@ -1,6 +1,35 @@
 'use client'
-import { signIn } from 'next-auth/react'
 import Image from 'next/image'
+
+let windowObjectReference: Window | null = null
+let previousUrl: string | null = null
+
+export const openPopUp = (url: string, name: string, callback: (e: MessageEvent) => void) => {
+	window.removeEventListener('message', callback)
+
+	const left = (screen.width - 400) / 2
+	const top = (screen.height - 500) / 2
+
+	const strWindowFeatures = `toolbar=no, menubar=no, location=no, width=400, height=500, top=100, left=${left}, top=${top}`
+
+	if (windowObjectReference === null || windowObjectReference.closed) {
+		windowObjectReference = window.open(url, name, strWindowFeatures)
+	} else if (previousUrl !== url) {
+		windowObjectReference = window.open(url, name, strWindowFeatures)
+		windowObjectReference?.focus()
+	} else {
+		windowObjectReference.focus()
+	}
+
+	window.addEventListener('message', (event) => callback(event), false)
+	previousUrl = url
+}
+
+const messageListener = async (e: MessageEvent) => {
+	if ('token' in e.data) {
+		window.localStorage.setItem('token', e.data.token)
+	}
+}
 
 export default function Login() {
 	return (
@@ -55,7 +84,7 @@ export default function Login() {
 
 				<div className="w-full my-12 flex flex-col justify-center gap-4">
 					<button
-						onClick={() => signIn('github')}
+						onClick={() => openPopUp('/api/auth/github', 'Github Login', messageListener)}
 						className="w-64 py-[10px] px-8 mx-auto border rounded-lg border-neutral-800 grid grid-cols-[1fr,24px] place-items-start gap-4 bg-[#0D1117]"
 					>
 						Login with Github
@@ -103,10 +132,7 @@ export default function Login() {
 							</defs>
 						</svg>
 					</button>
-					<button
-						onClick={() => signIn('google')}
-						className="w-64 py-[10px] px-8 mx-auto border rounded-lg border-neutral-800 grid grid-cols-[1fr,24px] place-items-start gap-4 bg-neutral-200 text-neutral-900"
-					>
+					<button className="w-64 py-[10px] px-8 mx-auto border rounded-lg border-neutral-800 grid grid-cols-[1fr,24px] place-items-start gap-4 bg-neutral-200 text-neutral-900">
 						Login with Google
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g clipPath="url(#clip0_220_287)">
@@ -142,29 +168,18 @@ export default function Login() {
 							</defs>
 						</svg>
 					</button>
-					<button
-						onClick={() => signIn('twitter')}
-						className="w-64 py-[10px] px-8 mx-auto border rounded-lg border-neutral-800 grid grid-cols-[1fr,24px] place-items-start gap-4 bg-[#000000]"
-					>
+					<button className="w-64 py-[10px] px-8 mx-auto border rounded-lg border-neutral-800 grid grid-cols-[1fr,24px] place-items-start gap-4 bg-[#000000]">
 						Login with X
-						<svg
-							width="24"
-							height="24"
-							viewBox="0 0 49 50"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-							data-astro-cid-j7pv25f6=""
-						>
-							<g clip-path="url(#clip0_211_275)" data-astro-cid-j7pv25f6="">
+						<svg width="24" height="24" viewBox="0 0 49 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<g clipPath="url(#clip0_211_275)">
 								<path
 									d="M29.102 21.1607L47.306 0H42.9923L27.1857 18.3736L14.561 0H0L19.091 27.7841L0 49.9743H4.31402L21.0062 30.5712L34.3387 49.9743H48.8998L29.1009 21.1607H29.102ZM23.1934 28.0289L21.259 25.2622L5.86842 3.24751H12.4945L24.9149 21.0141L26.8492 23.7807L42.9943 46.8745H36.3682L23.1934 28.0299V28.0289Z"
 									fill="currentColor"
-									data-astro-cid-j7pv25f6=""
 								></path>
 							</g>
-							<defs data-astro-cid-j7pv25f6="">
-								<clipPath id="clip0_211_275" data-astro-cid-j7pv25f6="">
-									<rect width="50" height="50" fill="currentColor" data-astro-cid-j7pv25f6=""></rect>
+							<defs>
+								<clipPath id="clip0_211_275">
+									<rect width="50" height="50" fill="currentColor"></rect>
 								</clipPath>
 							</defs>
 						</svg>

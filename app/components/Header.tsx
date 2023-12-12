@@ -1,17 +1,10 @@
-import { getServerSession } from 'next-auth'
-import { options } from '../api/auth/[...nextauth]/options'
-
 export default async function Header() {
-	const session = await getServerSession(options)
 	return (
 		<header className="fixed bottom-6 w-full h-fit z-10">
-			<nav className="glow header max-w-fit h-20 mx-auto">
+			<nav className="glow header max-w-fit h-[70px] mx-auto">
 				<ul className="glow-content flex justify-around items-center px-4 gap-12">
 					<li>
-						<a
-							className="flex flex-col justify-evenly items-center gap-1 w-24 text-neutral-400 hover:text-white"
-							href="/"
-						>
+						<a className="flex flex-col justify-evenly items-center w-24 text-neutral-400 hover:text-white" href="/">
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path
 									d="M4 10.9075C4 10.3308 4.24896 9.78216 4.68299 9.40238L10.683 4.15238C11.437 3.49259 12.563 3.49259 13.317 4.15238L19.317 9.40238C19.751 9.78216 20 10.3308 20 10.9075V18C20 19.1046 19.1046 20 18 20H16C14.8954 20 14 19.1046 14 18V16C14 14.8954 13.1046 14 12 14V14C10.8954 14 10 14.8954 10 16V18C10 19.1046 9.10457 20 8 20H6C4.89543 20 4 19.1046 4 18V10.9075Z"
@@ -25,7 +18,7 @@ export default async function Header() {
 					</li>
 					<li>
 						<a
-							className="flex flex-col justify-evenly items-center gap-1 w-24 text-neutral-400 hover:text-white"
+							className="flex flex-col justify-evenly items-center w-24 text-neutral-400 hover:text-white"
 							href="/playground"
 						>
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +62,7 @@ export default async function Header() {
 					</li>
 					<li>
 						<a
-							className="flex flex-col justify-evenly items-center gap-1 w-24 text-neutral-400 hover:text-white"
+							className="flex flex-col justify-evenly items-center w-24 text-neutral-400 hover:text-white"
 							href="login"
 						>
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +77,6 @@ export default async function Header() {
 									strokeWidth="1.5"
 								/>
 							</svg>
-							{session ? 'Login' : 'Logout'}
 						</a>
 					</li>
 				</ul>

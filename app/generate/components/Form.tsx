@@ -1,12 +1,23 @@
-import { FormEvent } from 'react'
+import { FormEvent, useState } from 'react'
 import MultiCheck from './MultiCheck'
 
 export default function Form({ transformUrlToCode }: { transformUrlToCode: (url: string) => void }) {
-	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+	const [frameworkChecked, setFrameworkChecked] = useState('None')
+	const [image, setImage] = useState<string | null>(null)
+
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
 		const form = e.currentTarget as HTMLFormElement
 		const url = form.elements.namedItem('url') as HTMLInputElement
+		const img = image
+		const framework = frameworkChecked
+
+		// console.log({
+		// 	url,
+		// 	image,
+		// 	framework,
+		// })
 
 		transformUrlToCode(url.value)
 	}
@@ -18,8 +29,29 @@ export default function Form({ transformUrlToCode }: { transformUrlToCode: (url:
 		const reader = new FileReader()
 		reader.readAsDataURL(file)
 		reader.onload = () => {
+			console.log(reader.result)
+			setImage(reader.result as string)
 			// setUrl(reader.result as string)
 			// setUrlInput(reader.result as string)
+		}
+	}
+
+	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const files = e.target.files as FileList
+		const file = files[0]
+
+		if (file) {
+			// Check if the selected file has an allowed file type
+			const allowedTypes = ['image/svg+xml', 'image/png', 'image/jpeg', 'image/webp', 'image/bmp']
+			if (allowedTypes.includes(file.type)) {
+				const reader = new FileReader()
+				reader.onload = (event: Event) => {
+					const target = event.target as EventTarget & { result: string }
+					setImage(target.result)
+				}
+
+				reader.readAsDataURL(file)
+			}
 		}
 	}
 
@@ -33,22 +65,25 @@ export default function Form({ transformUrlToCode }: { transformUrlToCode: (url:
 				<h2>Image</h2>
 				<div
 					className="test relative w-full h-32 border-2 border-dashed border-neutral-700 rounded-lg flex justify-center items-center"
-					onDrop={!navigator.userAgent.includes('Firefox') ? handleDrop : () => ''}
+					onDrop={handleDrop}
 				>
 					<input
+						onChange={handleFileChange}
 						className="absolute inset-0 text-transparent opacity-0 file:w-12 file:h-12"
+						name="image-file"
 						type="file"
 						accept=".svg, .png, .jpeg, .jpg, .webp, .bmp"
 					/>
 					<p className="text-sm text-neutral-500">
 						<span className="block w-10 h-10 mx-auto bg-[url('/image-icon.svg')] bg-cover" />
-						{!navigator.userAgent.includes('Firefox') ? 'Drop or Browse image' : 'Browse image'}
+						Drop or Browse image
 					</p>
 				</div>
 				<input
 					className="py-1 px-4 border border-neutral-600 rounded-lg bg-transparent hover:border-neutral-800 focus-visible:border-neutral-800 focus:border-neutral-800 target:border-neutral-800 placeholder:text-neutral-600"
 					id="ur"
 					type="url"
+					name="url"
 					placeholder="url..."
 				/>
 			</section>
@@ -58,7 +93,11 @@ export default function Form({ transformUrlToCode }: { transformUrlToCode: (url:
 				<h2>Framework</h2>
 
 				<div className="flex flex-wrap justify-between items-center gap-4">
-					<MultiCheck options={['React', 'Astro', 'Angular', 'None']} checked="None" />
+					<MultiCheck
+						options={['React', 'Astro', 'Angular', 'None']}
+						elementChecked={frameworkChecked}
+						setElementChecked={setFrameworkChecked}
+					/>
 				</div>
 			</section>
 		</form>

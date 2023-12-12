@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Form from './components/Form'
 import Image from 'next/image'
-import MultiCheck from './components/MultiCheck'
 
 const STEPS = {
 	INITIAL: 'INITIAL',
@@ -81,28 +80,28 @@ export default function Generate() {
 				</header>
 
 				<section className="max-w-5xl w-full mx-auto">
-					{step === STEPS.LOADING && (
-						<div className="flex justify-center items-center">
-							<h3>LOADING.....</h3>
-						</div>
-					)}
-
-					{step === STEPS.INITIAL && <Form transformUrlToCode={transformUrlToCode} />}
-
-					{step === STEPS.PREVIEW && (
-						<div className="rounded flex flex-col gap-4">
-							<iframe srcDoc={result} className="w-full h-full border-2 rounded border-gray-700 aspect-video" />
-							<pre>
-								<code>{result}</code>
-							</pre>
-						</div>
-					)}
+					<Form transformUrlToCode={transformUrlToCode} />
 				</section>
 
 				<footer className="absolute bottom-6 text-neutral-500">Built by monoald with 🧡</footer>
 			</aside>
 
-			<main className="bg-[#030301]"></main>
+			<main className="bg-[#030301]">
+				{step === STEPS.LOADING && (
+					<div className="flex justify-center items-center">
+						<h3>LOADING.....</h3>
+					</div>
+				)}
+
+				{step === STEPS.PREVIEW && (
+					<div className="rounded flex flex-col gap-4">
+						<iframe srcDoc={result} className="w-full h-full border-2 rounded border-gray-700 aspect-video" />
+						<pre>
+							<code>{result}</code>
+						</pre>
+					</div>
+				)}
+			</main>
 		</div>
 	)
 }

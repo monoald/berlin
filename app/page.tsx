@@ -38,7 +38,7 @@ export default function Home() {
 							No coding needed. Just upload an image, and watch it become a fully functional app. Easy, fast, and
 							hassle-free app development for everyone.
 						</p>
-						<button className="glow w-32 h-10 button">
+						<button onClick={() => console.log('HOLAAA')} className="glow w-32 h-10 button">
 							<div className="glow-content flex items-center justify-center text-sm">Try For Free</div>
 						</button>
 					</div>

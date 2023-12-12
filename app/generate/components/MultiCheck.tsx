@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 type Props = {
 	options: string[]
-	checked: string
+	elementChecked: string
+	setElementChecked: Dispatch<SetStateAction<string>>
 }
 
-export default function MultiCheck({ options, checked }: Props) {
-	const [elementChecked, setElementChecked] = useState(checked)
+export default function MultiCheck({ options, elementChecked, setElementChecked }: Props) {
 	const handleCheck = (id: string) => {
 		setElementChecked(id)
 	}

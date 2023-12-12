@@ -6,8 +6,17 @@ mongoose.Promise = global.Promise
 const userSchema = new Schema(
 	{
 		name: String,
-		email: String,
-		password: String,
+		email: {
+			type: String,
+			required: true,
+			trim: true,
+			unique: true,
+		},
+		provider: String,
+		loginToken: {
+			type: String,
+			trim: true,
+		},
 	},
 	{
 		timestamps: true,
