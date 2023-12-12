@@ -132,7 +132,10 @@ export default function Login() {
 							</defs>
 						</svg>
 					</button>
-					<button className="w-64 py-[10px] px-8 mx-auto border rounded-lg border-neutral-800 grid grid-cols-[1fr,24px] place-items-start gap-4 bg-neutral-200 text-neutral-900">
+					<button
+						onClick={() => openPopUp('/api/auth/google', 'Google Login', messageListener)}
+						className="w-64 py-[10px] px-8 mx-auto border rounded-lg border-neutral-800 grid grid-cols-[1fr,24px] place-items-start gap-4 bg-neutral-200 text-neutral-900"
+					>
 						Login with Google
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g clipPath="url(#clip0_220_287)">

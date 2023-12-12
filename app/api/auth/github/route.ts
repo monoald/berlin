@@ -39,7 +39,7 @@ export async function GET(request: Request) {
 
 		if (userDB && userDB.provider !== 'github') {
 			return new Response(
-				'The "email" linked whit this Github account is already registered with another application.',
+				'The "email" linked with this Github account is already registered with another application.',
 				{ status: 400 },
 			)
 		}
@@ -62,6 +62,4 @@ export async function GET(request: Request) {
 
 		redirect(`/login-loader?token=${token}`)
 	}
-
-	return new Response('code', { status: 200 })
 }
