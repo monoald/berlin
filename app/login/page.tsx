@@ -171,22 +171,6 @@ export default function Login() {
 							</defs>
 						</svg>
 					</button>
-					<button className="w-64 py-[10px] px-8 mx-auto border rounded-lg border-neutral-800 grid grid-cols-[1fr,24px] place-items-start gap-4 bg-[#000000]">
-						Login with X
-						<svg width="24" height="24" viewBox="0 0 49 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<g clipPath="url(#clip0_211_275)">
-								<path
-									d="M29.102 21.1607L47.306 0H42.9923L27.1857 18.3736L14.561 0H0L19.091 27.7841L0 49.9743H4.31402L21.0062 30.5712L34.3387 49.9743H48.8998L29.1009 21.1607H29.102ZM23.1934 28.0289L21.259 25.2622L5.86842 3.24751H12.4945L24.9149 21.0141L26.8492 23.7807L42.9943 46.8745H36.3682L23.1934 28.0299V28.0289Z"
-									fill="currentColor"
-								></path>
-							</g>
-							<defs>
-								<clipPath id="clip0_211_275">
-									<rect width="50" height="50" fill="currentColor"></rect>
-								</clipPath>
-							</defs>
-						</svg>
-					</button>
 				</div>
 
 				{/* <p className="text-xs text-neutral-400">

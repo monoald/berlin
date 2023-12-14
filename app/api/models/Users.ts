@@ -17,6 +17,12 @@ const userSchema = new Schema(
 			type: String,
 			trim: true,
 		},
+		generations: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Generation',
+			},
+		],
 	},
 	{
 		timestamps: true,
