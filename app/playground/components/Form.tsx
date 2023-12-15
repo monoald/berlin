@@ -1,15 +1,13 @@
 import { Dispatch, FormEvent, SetStateAction, useState } from 'react'
-import MultiCheck from './MultiCheck'
 import Image from 'next/image'
 
 type Props = {
 	transformToCode: (data: { img: string }) => void
 	setDone: Dispatch<SetStateAction<boolean>>
 	setResult: Dispatch<SetStateAction<string>>
-	setImg: Dispatch<SetStateAction<string>>
 }
 
-export default function Form({ transformToCode, setDone, setResult, setImg }: Props) {
+export default function Form({ transformToCode, setDone, setResult }: Props) {
 	const [frameworkChecked, setFrameworkChecked] = useState('None')
 	const [image, setImage] = useState<string | null>(null)
 
@@ -28,7 +26,6 @@ export default function Form({ transformToCode, setDone, setResult, setImg }: Pr
 		setImage(null)
 		setDone(false)
 		setResult('')
-		setImg('')
 	}
 
 	const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
@@ -53,7 +50,6 @@ export default function Form({ transformToCode, setDone, setResult, setImg }: Pr
 				const reader = new FileReader()
 				reader.onload = (event: Event) => {
 					const target = event.target as EventTarget & { result: string }
-					console.log(target.result)
 					setImage(target.result)
 				}
 

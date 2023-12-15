@@ -39,8 +39,6 @@ async function save(image: string, code: string) {
 			code,
 		}),
 	})
-
-	console.log(res)
 }
 
 export default function Generate() {
@@ -91,7 +89,7 @@ export default function Generate() {
 				</header>
 
 				<section className="max-w-5xl w-full mx-auto">
-					<Form transformToCode={transformToCode} setDone={setDone} setImg={setImg} setResult={setResult} />
+					<Form transformToCode={transformToCode} setDone={setDone} setResult={setResult} />
 				</section>
 
 				<footer className="absolute bottom-6 text-neutral-500">Built by monoald with 🧡</footer>
