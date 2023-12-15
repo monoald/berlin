@@ -1,7 +1,15 @@
-import { FormEvent, useState } from 'react'
+import { Dispatch, FormEvent, SetStateAction, useState } from 'react'
 import MultiCheck from './MultiCheck'
+import Image from 'next/image'
 
-export default function Form({ transformToCode }: { transformToCode: (data: { img: string }) => void }) {
+type Props = {
+	transformToCode: (data: { img: string }) => void
+	setDone: Dispatch<SetStateAction<boolean>>
+	setResult: Dispatch<SetStateAction<string>>
+	setImg: Dispatch<SetStateAction<string>>
+}
+
+export default function Form({ transformToCode, setDone, setResult, setImg }: Props) {
 	const [frameworkChecked, setFrameworkChecked] = useState('None')
 	const [image, setImage] = useState<string | null>(null)
 
@@ -15,6 +23,12 @@ export default function Form({ transformToCode }: { transformToCode: (data: { im
 		if (!image && url.value !== '') transformToCode({ img: url.value })
 
 		if (image && url.value === '') transformToCode({ img: image })
+
+		url.value = ''
+		setImage(null)
+		setDone(false)
+		setResult('')
+		setImg('')
 	}
 
 	const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
@@ -39,6 +53,7 @@ export default function Form({ transformToCode }: { transformToCode: (data: { im
 				const reader = new FileReader()
 				reader.onload = (event: Event) => {
 					const target = event.target as EventTarget & { result: string }
+					console.log(target.result)
 					setImage(target.result)
 				}
 
@@ -55,22 +70,27 @@ export default function Form({ transformToCode }: { transformToCode: (data: { im
 
 			<section className="flex flex-col gap-4">
 				<h2>Image</h2>
-				<div
-					className="test relative w-full h-32 border-2 border-dashed border-neutral-700 rounded-lg flex justify-center items-center"
-					onDrop={handleDrop}
-				>
-					<input
-						onChange={handleFileChange}
-						className="absolute inset-0 text-transparent opacity-0 file:w-12 file:h-12"
-						name="image-file"
-						type="file"
-						accept=".svg, .png, .jpeg, .jpg, .webp, .bmp"
-					/>
-					<p className="text-sm text-neutral-500">
-						<span className="block w-10 h-10 mx-auto bg-[url('/image-icon.svg')] bg-cover" />
-						Drop or Browse image
-					</p>
-				</div>
+				{!image ? (
+					<div
+						className="test relative w-full h-32 border-2 border-dashed border-neutral-700 rounded-lg flex justify-center items-center"
+						onDrop={handleDrop}
+					>
+						<input
+							onChange={handleFileChange}
+							className="absolute inset-0 text-transparent opacity-0 file:w-12 file:h-12"
+							name="image-file"
+							type="file"
+							accept=".svg, .png, .jpeg, .jpg, .webp, .bmp"
+						/>
+						<p className="text-sm text-neutral-500">
+							<span className="block w-10 h-10 mx-auto bg-[url('/image-icon.svg')] bg-cover" />
+							Drop or Browse image
+						</p>
+					</div>
+				) : (
+					<Image src={image} alt="Web to generate" className="w-full h-32 rounded-lg" width={300} height={200} />
+				)}
+
 				<input
 					className="py-1 px-4 border border-neutral-600 rounded-lg bg-transparent hover:border-neutral-800 focus-visible:border-neutral-800 focus:border-neutral-800 target:border-neutral-800 placeholder:text-neutral-600"
 					id="ur"
@@ -81,7 +101,7 @@ export default function Form({ transformToCode }: { transformToCode: (data: { im
 			</section>
 			<hr className="border-neutral-600 my-1" />
 
-			<section className="flex flex-col gap-4">
+			{/* <section className="flex flex-col gap-4">
 				<h2>Framework</h2>
 
 				<div className="flex flex-wrap justify-between items-center gap-4">
@@ -91,7 +111,7 @@ export default function Form({ transformToCode }: { transformToCode: (data: { im
 						setElementChecked={setFrameworkChecked}
 					/>
 				</div>
-			</section>
+			</section> */}
 		</form>
 	)
 }

@@ -91,7 +91,7 @@ export default function Generate() {
 				</header>
 
 				<section className="max-w-5xl w-full mx-auto">
-					<Form transformToCode={transformToCode} />
+					<Form transformToCode={transformToCode} setDone={setDone} setImg={setImg} setResult={setResult} />
 				</section>
 
 				<footer className="absolute bottom-6 text-neutral-500">Built by monoald with 🧡</footer>
