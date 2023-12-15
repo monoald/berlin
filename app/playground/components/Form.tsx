@@ -1,25 +1,37 @@
 import { FormEvent, useState } from 'react'
 import MultiCheck from './MultiCheck'
 
-export default function Form({ transformUrlToCode }: { transformUrlToCode: (url: string) => void }) {
+const toBase64 = (file: File) => {
+	return new Promise<string>((resolve, reject) => {
+		const reader = new FileReader()
+		reader.readAsDataURL(file)
+		reader.onload = () => resolve(reader.result as string)
+		reader.onerror = (error) => reject(error)
+	})
+}
+
+export default function Form({ transformToCode }: { transformToCode: (url: string) => void }) {
 	const [frameworkChecked, setFrameworkChecked] = useState('None')
 	const [image, setImage] = useState<string | null>(null)
+
+	const transformImageToCode = async (img: string) => {
+		transformToCode(JSON.stringify({ img }))
+	}
+
+	const transformUrlToCode = async (url: string) => {
+		transformToCode(JSON.stringify({ url }))
+	}
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
 		const form = e.currentTarget as HTMLFormElement
 		const url = form.elements.namedItem('url') as HTMLInputElement
-		const img = image
 		const framework = frameworkChecked
 
-		// console.log({
-		// 	url,
-		// 	image,
-		// 	framework,
-		// })
+		if (!image && url.value !== '') transformUrlToCode(url.value)
 
-		transformUrlToCode(url.value)
+		if (image && url.value === '') transformImageToCode(image as string)
 	}
 
 	const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
@@ -29,10 +41,7 @@ export default function Form({ transformUrlToCode }: { transformUrlToCode: (url:
 		const reader = new FileReader()
 		reader.readAsDataURL(file)
 		reader.onload = () => {
-			console.log(reader.result)
 			setImage(reader.result as string)
-			// setUrl(reader.result as string)
-			// setUrlInput(reader.result as string)
 		}
 	}
 

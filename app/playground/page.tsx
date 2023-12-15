@@ -11,15 +11,6 @@ const STEPS = {
 	ERROR: 'ERROR',
 }
 
-const toBase64 = (file: File) => {
-	return new Promise<string>((resolve, reject) => {
-		const reader = new FileReader()
-		reader.readAsDataURL(file)
-		reader.onload = () => resolve(reader.result as string)
-		reader.onerror = (error) => reject(error)
-	})
-}
-
 async function* streamReader(res: Response) {
 	const reader = res.body?.getReader()
 	const decoder = new TextDecoder()
@@ -45,6 +36,7 @@ export default function Generate() {
 			body,
 			headers: {
 				'Content-Type': 'application/json',
+				authorization: `Bearer ${window.localStorage.getItem('token')}`,
 			},
 		})
 
@@ -60,18 +52,9 @@ export default function Generate() {
 		}
 	}
 
-	const transformImageToCode = async (file: File) => {
-		const img = await toBase64(file)
-		transformToCode(JSON.stringify({ img }))
-	}
-
-	const transformUrlToCode = async (url: string) => {
-		transformToCode(JSON.stringify({ url }))
-	}
-
 	return (
 		<div className="grid grid-cols-[282px_1fr]">
-			<aside className="relative min-h-screen p-6 flex flex-col items-center gap-5 bg-[#0d0d0d] rounded-lg border border-neutral-800">
+			<aside className="sticky top-0 min-h-screen max-h-[100vh] p-6 flex flex-col items-center gap-5 bg-[#0d0d0d] rounded-lg border border-neutral-800">
 				<header className="w-full pb-6 text-center border-b border-b-neutral-600">
 					<h1 className="mb-2 text-3xl font-semibold">
 						<Image className="mx-auto" src="/berlin.png" alt="logo" width={120} height={80} />
@@ -80,13 +63,13 @@ export default function Generate() {
 				</header>
 
 				<section className="max-w-5xl w-full mx-auto">
-					<Form transformUrlToCode={transformUrlToCode} />
+					<Form transformToCode={transformToCode} />
 				</section>
 
 				<footer className="absolute bottom-6 text-neutral-500">Built by monoald with 🧡</footer>
 			</aside>
 
-			<main className="bg-[#030301]">
+			<main className="bg-[#030301] p-20">
 				{step === STEPS.LOADING && (
 					<div className="flex justify-center items-center">
 						<h3>LOADING.....</h3>
@@ -94,9 +77,9 @@ export default function Generate() {
 				)}
 
 				{step === STEPS.PREVIEW && (
-					<div className="rounded flex flex-col gap-4">
-						<iframe srcDoc={result} className="w-full h-full border-2 rounded border-gray-700 aspect-video" />
-						<pre>
+					<div className="w-full rounded-lg flex flex-col gap-14">
+						<iframe srcDoc={result} className="w-full h-fit border-2 rounded border-gray-700 aspect-video" />
+						<pre className="border rounded-lg border-neutral-800 p-8 bg-[#0d0d0d]">
 							<code>{result}</code>
 						</pre>
 					</div>

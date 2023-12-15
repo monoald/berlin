@@ -18,5 +18,5 @@ export default function LoginVerification() {
 			window.close()
 		}
 	}, [])
-	return <div>page</div>
+	return <div className="loader"></div>
 }

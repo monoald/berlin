@@ -31,7 +31,6 @@ const openai = new OpenAI({
 export const runtime = 'edge'
 
 export async function POST(req: Request) {
-	console.log('BLAAAAAAAAAAAAAAAAAAAAAAAAAA')
 	const { url, img } = await req.json()
 
 	const imageUrl = url ?? img

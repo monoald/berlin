@@ -1,10 +1,14 @@
 'use client'
+
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
+
+const NoSSR = dynamic(() => import('../components/Header'), { ssr: false })
 
 let windowObjectReference: Window | null = null
 let previousUrl: string | null = null
 
-export const openPopUp = (url: string, name: string, callback: (e: MessageEvent) => void) => {
+const openPopUp = (url: string, name: string, callback: (e: MessageEvent) => void) => {
 	window.removeEventListener('message', callback)
 
 	const left = (screen.width - 400) / 2
@@ -28,6 +32,7 @@ export const openPopUp = (url: string, name: string, callback: (e: MessageEvent)
 const messageListener = async (e: MessageEvent) => {
 	if ('token' in e.data) {
 		window.localStorage.setItem('token', e.data.token)
+		window.location.href = '/playground'
 	}
 }
 

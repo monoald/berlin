@@ -1,4 +1,21 @@
-export default async function Header() {
+'use client'
+
+import { useEffect, useState } from 'react'
+
+export default function Header() {
+	const [firstRender, setFirstRender] = useState(true)
+	const [token, setToken] = useState('')
+
+	useEffect(() => {
+		if (firstRender) {
+			setFirstRender(false)
+		} else {
+			if (typeof window !== 'undefined') {
+				setToken(window.localStorage.getItem('token') as string)
+			}
+		}
+	}, [firstRender])
+
 	return (
 		<header className="fixed bottom-6 w-full h-fit z-10">
 			<nav className="glow header max-w-fit h-[70px] mx-auto">
@@ -62,8 +79,8 @@ export default async function Header() {
 					</li>
 					<li>
 						<a
+							href={token !== '' && token !== null ? '/' : '/login'}
 							className="flex flex-col justify-evenly items-center w-24 text-neutral-400 hover:text-white"
-							href="login"
 						>
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path
@@ -77,6 +94,7 @@ export default async function Header() {
 									strokeWidth="1.5"
 								/>
 							</svg>
+							{token !== '' && token !== null ? 'Logout' : 'Login'}
 						</a>
 					</li>
 				</ul>
