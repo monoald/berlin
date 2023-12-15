@@ -11,45 +11,6 @@ export async function POST(request: Request) {
 
 	token = token.split(' ')[1]
 
-	let response: Response
-
-	// jwt.verify(token, process.env.SECRET as string, async function (error, decoded) {
-	// 	if (error) {
-	// 		response = new Response(JSON.stringify({ error: 'Missing or invalid token.' }), { status: 400 })
-	// 		return
-	// 	}
-
-	// 	const { id } = decoded as { id: string }
-
-	// 	console.log(id)
-
-	// 	const userDB = await User.findById(id)
-
-	// 	if (!userDB) {
-	// 		response = new Response(JSON.stringify({ error: 'User does not exist.' }), { status: 400 })
-	// 		return
-	// 	}
-
-	// 	const body = await request.json()
-
-	// 	console.log(body)
-
-	// 	const image = body.image
-	// 	const code = body.code
-
-	// 	const newGeneration = new Generation({
-	// 		image,
-	// 		code,
-	// 		users: [userDB._id],
-	// 	})
-	// 	await newGeneration.save()
-
-	// 	userDB.generations.push(newGeneration._id)
-	// 	await userDB.save()
-
-	// 	response = new Response(JSON.stringify({ message: 'Saved successfuly' }), { status: 201 })
-	// })
-
 	try {
 		const decoded = jwt.verify(token, process.env.SECRET as string)
 		const { id } = decoded as { id: string }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Form from './components/Form'
 import Image from 'next/image'
 
@@ -11,7 +11,7 @@ const STEPS = {
 	ERROR: 'ERROR',
 }
 
-async function* streamReader(res: Response) {
+async function* streamReader(res: Response, setDone: Dispatch<SetStateAction<boolean>>) {
 	const reader = res.body?.getReader()
 	const decoder = new TextDecoder()
 
@@ -21,22 +21,50 @@ async function* streamReader(res: Response) {
 		const { done, value } = await reader.read()
 		const chunk = decoder.decode(value)
 		yield chunk
-		if (done) break
+		if (done) {
+			setDone(true)
+			break
+		}
 	}
+}
+
+async function save(image: string, code: string) {
+	const res = await fetch('/api/generations', {
+		method: 'POST',
+		headers: {
+			authentication: `Bearer ${window.localStorage.getItem('token')}`,
+		},
+		body: JSON.stringify({
+			image,
+			code,
+		}),
+	})
+
+	console.log(res)
 }
 
 export default function Generate() {
 	const [result, setResult] = useState('')
 	const [step, setStep] = useState(STEPS.INITIAL)
+	const [done, setDone] = useState(false)
+	const [img, setImg] = useState('')
 
-	const transformToCode = async (body: string) => {
+	useEffect(() => {
+		if (done) {
+			save(img, result)
+		}
+	}, [done])
+
+	const transformToCode = async (data: { img: string }) => {
+		setImg(data.img)
+		const body = JSON.stringify(data)
 		setStep(STEPS.LOADING)
 		const res = await fetch('api/generate-code-from-image', {
 			method: 'POST',
 			body,
 			headers: {
 				'Content-Type': 'application/json',
-				authorization: `Bearer ${window.localStorage.getItem('token')}`,
+				authentication: `Bearer ${window.localStorage.getItem('token')}`,
 			},
 		})
 
@@ -47,7 +75,7 @@ export default function Generate() {
 
 		setStep(STEPS.PREVIEW)
 
-		for await (const chunk of streamReader(res)) {
+		for await (const chunk of streamReader(res, setDone)) {
 			setResult((prev) => prev + chunk)
 		}
 	}
@@ -71,8 +99,8 @@ export default function Generate() {
 
 			<main className="bg-[#030301] p-20">
 				{step === STEPS.LOADING && (
-					<div className="flex justify-center items-center">
-						<h3>LOADING.....</h3>
+					<div className="w-full h-screen grid place-items-center">
+						<div className="loader"></div>
 					</div>
 				)}
 

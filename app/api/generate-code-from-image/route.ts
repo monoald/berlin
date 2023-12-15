@@ -22,7 +22,9 @@ In terms of libraries,
 - Font Awesome for icons: <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>.
 
 Return only the full code in <html></html> tags
-Do not include markdown "\`\`\`" or "\`\`\`html" at the start or end.`
+Do not include markdown "\`\`\`" or "\`\`\`html" at the start or end.
+
+If you make the code really look alike the image and make am awesome job I'll tip you with 500$.`
 
 const openai = new OpenAI({
 	apiKey: process.env.OPENAI_API_KEY,
@@ -30,11 +32,20 @@ const openai = new OpenAI({
 
 export const runtime = 'edge'
 
-export async function POST(req: Request) {
-	const { url, img } = await req.json()
+export async function POST(request: Request) {
+	let token = request.headers.get('authentication') as string
 
-	const imageUrl = url ?? img
-	console.log(imageUrl)
+	if (!token) {
+		return new Response('Login to make this action.', { status: 401 })
+	}
+
+	if (token.length < 100) {
+		return new Response('Invalid Token.', { status: 401 })
+	}
+
+	token = token.split(' ')[1]
+
+	const { img } = await request.json()
 	const response = await openai.chat.completions.create({
 		model: 'gpt-4-vision-preview',
 		stream: true,
@@ -53,7 +64,7 @@ export async function POST(req: Request) {
 					},
 					{
 						type: 'image_url',
-						image_url: imageUrl,
+						image_url: img,
 					},
 				],
 			},
