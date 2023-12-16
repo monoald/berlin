@@ -73,7 +73,7 @@ export default function Home() {
 											</clipPath>
 										</defs>
 									</svg>
-									<p>Give the image to Berlin</p>
+									<p>Get the image of your web page</p>
 								</div>
 							</div>
 						</div>
@@ -93,7 +93,7 @@ export default function Home() {
 											</clipPath>
 										</defs>
 									</svg>
-									<p>Enjoy your web page!</p>
+									<p>Give the image to Berlin</p>
 								</div>
 							</div>
 						</div>
@@ -115,7 +115,7 @@ export default function Home() {
 											</clipPath>
 										</defs>
 									</svg>
-									<p>Give the image to Berlin</p>
+									<p>Enjoy your web page!</p>
 								</div>
 							</div>
 						</div>
@@ -146,35 +146,31 @@ export default function Home() {
 					</div>
 				</section>
 
-				<section>
+				<section className="mb-40">
 					<h2 className="text-3xl text-center font-bold">Frequently Asked Questions</h2>
 
 					<ul className="w-screen max-w-lg my-24 mx-auto flex flex-col gap-6">
 						<Faq
-							question="How many free credits I have?"
-							answer="You will have 10 free credits that will be refreshed each month."
+							question="Is Berlin Free?"
+							answer="Yes! At the moment Berlin is in its alpha version, so you can use your Free credits."
 							id="free-credits"
 						/>
 						<Faq
-							question="How many free credits I have?"
-							answer="You will have 10 free credits that will be refreshed each month."
+							question="How many free credits do I get?"
+							answer="You will receive 20 free credits each month."
 							id="free-credits1"
 						/>
 						<Faq
-							question="How many free credits I have?"
-							answer="You will have 10 free credits that will be refreshed each month."
+							question="How many credits does a generation cost?"
+							answer="A generation costs 1 credit, so you have 20 free generations per month."
 							id="free-credits2"
 						/>
 						<Faq
-							question="How many free credits I have?"
-							answer="You will have 10 free credits that will be refreshed each month."
+							question="Is Berlin meant to be a paid service?"
+							answer="At the moment, no, Berlin is a personal project."
 							id="free-credits3"
 						/>
-						<Faq
-							question="How many free credits I have?"
-							answer="You will have 10 free credits that will be refreshed each month."
-							id="free-credits4"
-						/>
+						<Faq question="Who made Berlin?" answer="Berlin is a personal project of Monoald." id="free-credits4" />
 					</ul>
 				</section>
 			</main>
