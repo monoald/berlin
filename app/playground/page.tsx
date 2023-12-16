@@ -53,6 +53,7 @@ export default function Playground() {
 		if (done) {
 			save(img, result)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [done])
 
 	useEffect(() => {

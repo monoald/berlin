@@ -3,7 +3,6 @@ import Image from 'next/image'
 import Header from './components/Header'
 import { MouseEvent } from 'react'
 import Faq from './components/Faq'
-import { redirect } from 'next/navigation'
 
 export default function Home() {
 	const handleMouseMove = (e: MouseEvent<HTMLElement, globalThis.MouseEvent>) => {
@@ -153,24 +152,17 @@ export default function Home() {
 						<Faq
 							question="Is Berlin Free?"
 							answer="Yes! At the moment Berlin is in its alpha version, so you can use your Free credits."
-							id="free-credits"
 						/>
-						<Faq
-							question="How many free credits do I get?"
-							answer="You will receive 20 free credits each month."
-							id="free-credits1"
-						/>
+						<Faq question="How many free credits do I get?" answer="You will receive 20 free credits each month." />
 						<Faq
 							question="How many credits does a generation cost?"
 							answer="A generation costs 1 credit, so you have 20 free generations per month."
-							id="free-credits2"
 						/>
 						<Faq
 							question="Is Berlin meant to be a paid service?"
 							answer="At the moment, no, Berlin is a personal project."
-							id="free-credits3"
 						/>
-						<Faq question="Who made Berlin?" answer="Berlin is a personal project of Monoald." id="free-credits4" />
+						<Faq question="Who made Berlin?" answer="Berlin is a personal project of Monoald." />
 					</ul>
 				</section>
 			</main>

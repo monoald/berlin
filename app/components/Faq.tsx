@@ -1,13 +1,12 @@
 type Props = {
 	question: string
 	answer: string
-	id: string
 }
 
-export default function Faq({ question, answer, id }: Props) {
+export default function Faq({ question, answer }: Props) {
 	return (
 		<li className="faq glow w-full p-[1px] h-fit">
-			<details name="faq" className="w-full rounded-lg bg-[#0d0d0d] text-start z-[1]">
+			<details className="w-full rounded-lg bg-[#0d0d0d] text-start z-[1]">
 				<summary className="p-5 flex justify-between list-none">
 					{question}
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
