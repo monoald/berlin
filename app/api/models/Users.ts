@@ -13,6 +13,15 @@ const userSchema = new Schema(
 			unique: true,
 		},
 		provider: String,
+		credits: {
+			type: Number,
+			default: 20,
+		},
+		subscription: {
+			type: String,
+			enum: ['freemium', 'developer', 'pro'],
+			default: 'freemium',
+		},
 		loginToken: {
 			type: String,
 			trim: true,

@@ -5,9 +5,10 @@ type Props = {
 	transformToCode: (data: { img: string }) => void
 	setDone: Dispatch<SetStateAction<boolean>>
 	setResult: Dispatch<SetStateAction<string>>
+	setUser: Dispatch<SetStateAction<User | undefined | null>>
 }
 
-export default function Form({ transformToCode, setDone, setResult }: Props) {
+export default function Form({ transformToCode, setDone, setResult, setUser }: Props) {
 	const [frameworkChecked, setFrameworkChecked] = useState('None')
 	const [image, setImage] = useState<string | null>(null)
 
@@ -26,6 +27,12 @@ export default function Form({ transformToCode, setDone, setResult }: Props) {
 		setImage(null)
 		setDone(false)
 		setResult('')
+		setUser((prev) => {
+			if (prev !== undefined && prev !== null) {
+				return { ...prev, credits: prev.credits - 1 }
+			}
+			return prev
+		})
 	}
 
 	const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {

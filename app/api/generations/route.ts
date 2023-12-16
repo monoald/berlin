@@ -34,6 +34,7 @@ export async function POST(request: Request) {
 		await newGeneration.save()
 
 		userDB.generations.push(newGeneration._id)
+		userDB.credits -= 1
 		await userDB.save()
 
 		return new Response(JSON.stringify({ message: 'Saved successfuly' }), { status: 201 })

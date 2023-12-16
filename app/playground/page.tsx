@@ -3,6 +3,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Form from './components/Form'
 import Image from 'next/image'
+import { redirect } from 'next/navigation'
 
 const STEPS = {
 	INITIAL: 'INITIAL',
@@ -41,17 +42,46 @@ async function save(image: string, code: string) {
 	})
 }
 
-export default function Generate() {
+export default function Playground() {
 	const [result, setResult] = useState('')
 	const [step, setStep] = useState(STEPS.INITIAL)
 	const [done, setDone] = useState(false)
 	const [img, setImg] = useState('')
+	const [user, setUser] = useState<User | undefined | null>()
 
 	useEffect(() => {
 		if (done) {
 			save(img, result)
 		}
 	}, [done])
+
+	useEffect(() => {
+		async function getUser() {
+			try {
+				const res = await fetch('/api/users/getUser', {
+					headers: {
+						authentication: `Bearer ${window.localStorage.getItem('token')}`,
+					},
+				})
+
+				const data = await res.json()
+
+				if ('error' in data) {
+					setUser(null)
+					return
+				}
+
+				setUser(data)
+			} catch (error) {
+				setUser(null)
+			}
+		}
+		getUser()
+	}, [])
+
+	if (user === null) {
+		redirect('login')
+	}
 
 	const transformToCode = async (data: { img: string }) => {
 		setImg(data.img)
@@ -78,6 +108,14 @@ export default function Generate() {
 		}
 	}
 
+	if (user === undefined) {
+		return (
+			<div className="w-full h-screen grid place-items-center">
+				<div className="loader"></div>
+			</div>
+		)
+	}
+
 	return (
 		<div className="grid grid-cols-[282px_1fr]">
 			<aside className="sticky top-0 min-h-screen max-h-[100vh] p-6 flex flex-col items-center gap-5 bg-[#0d0d0d] rounded-lg border border-neutral-800">
@@ -89,7 +127,11 @@ export default function Generate() {
 				</header>
 
 				<section className="max-w-5xl w-full mx-auto">
-					<Form transformToCode={transformToCode} setDone={setDone} setResult={setResult} />
+					<div className="w-full h-fit pb-4 flex justify-center items-center gap-2">
+						<p>{user?.credits}</p>
+						<Image src="/berlin-coin.webp" alt="Berlin Credits" width={30} height={30} />
+					</div>
+					<Form transformToCode={transformToCode} setDone={setDone} setResult={setResult} setUser={setUser} />
 				</section>
 
 				<footer className="absolute bottom-6 text-neutral-500">Built by monoald with 🧡</footer>
