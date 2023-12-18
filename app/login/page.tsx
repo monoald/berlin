@@ -39,10 +39,10 @@ const messageListener = async (e: MessageEvent) => {
 export default function Login() {
 	return (
 		<>
-			<div className="w-2/4 h-full grid place-items-center ">
+			<div className="hidden md:grid w-2/4 h-full place-items-center">
 				<Image src="/astronaut-moon.webp" alt="astronaut" width={240} height={380} />
 			</div>
-			<div className="flex flex-col justify-center items-center w-2/4 h-full border border-neutral-800 rounded-lg bg-[rgba(255,255,255,0.05)]">
+			<div className="flex flex-col justify-center items-center w-full md:w-2/4 h-full border border-neutral-800 rounded-lg bg-[rgba(255,255,255,0.05)]">
 				<div className="flex flex-col justify-center items-center gap-4">
 					<figure className="mb-8">
 						<Image src="/berlin.png" alt="logo" width={140} height={90} />

@@ -18,5 +18,9 @@ export default function LoginVerification() {
 			window.close()
 		}
 	}, [])
-	return <div className="loader"></div>
+	return (
+		<div className="w-full h-screen grid place-items-center">
+			<div className="loader"></div>
+		</div>
+	)
 }
