@@ -172,10 +172,10 @@ export default function Home() {
 							question="Is Berlin Free?"
 							answer="Yes! At the moment Berlin is in its alpha version, so you can use your Free credits."
 						/>
-						<Faq question="How many free credits do I get?" answer="You will receive 20 free credits each month." />
+						<Faq question="How many free credits do I get?" answer="You will receive 8 free credits each month." />
 						<Faq
 							question="How many credits does a generation cost?"
-							answer="A generation costs 1 credit, so you have 20 free generations per month."
+							answer="A generation costs 1 credit, so you have 8 free generations per month."
 						/>
 						<Faq
 							question="Is Berlin meant to be a paid service?"

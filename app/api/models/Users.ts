@@ -15,7 +15,7 @@ const userSchema = new Schema(
 		provider: String,
 		credits: {
 			type: Number,
-			default: 20,
+			default: 8,
 		},
 		subscription: {
 			type: String,
