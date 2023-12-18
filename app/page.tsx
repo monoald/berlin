@@ -35,8 +35,8 @@ export default function Home() {
 					<div className="flex flex-col gap-10">
 						<h1 className="w-auto text-6xl font-bold">Build your dream app with just an image!</h1>
 						<p className="text-lg text-neutral-500">
-							No coding needed. Just upload an image, and watch it become a fully functional app. Easy, fast, and
-							hassle-free app development for everyone.
+							No coding needed. Just upload an image, and watch it become a fully web app. Easy, fast, and hassle-free
+							app development for everyone.
 						</p>
 						<a href="/playground" className="glow w-32 h-10 button">
 							<div className="glow-content flex items-center justify-center text-sm">Try For Free</div>
@@ -44,12 +44,7 @@ export default function Home() {
 					</div>
 
 					<div>
-						<Image
-							src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/250571661/original/3cbc9374b50b5669193d5e96275891143a7c96ff/design-admin-panel-ui-web-app-application-saas-ui-ux-mockup-in-figma-xd.png"
-							alt="Image"
-							width={500}
-							height={300}
-						/>
+						<Image src="/hero.webp" alt="Image" width={700} height={300} />
 					</div>
 				</section>
 
