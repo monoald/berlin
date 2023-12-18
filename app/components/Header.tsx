@@ -1,10 +1,13 @@
 'use client'
 
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 export default function Header() {
 	const [firstRender, setFirstRender] = useState(true)
 	const [token, setToken] = useState('')
+	const router = useRouter()
 
 	useEffect(() => {
 		if (firstRender) {
@@ -15,6 +18,12 @@ export default function Header() {
 			}
 		}
 	}, [firstRender])
+
+	const handleLogout = () => {
+		window.localStorage.removeItem('token')
+		setToken('')
+		router.push('/')
+	}
 
 	return (
 		<header className="fixed bottom-6 w-full h-fit z-10">
@@ -78,24 +87,45 @@ export default function Header() {
 						</a>
 					</li>
 					<li>
-						<a
-							href={token !== '' && token !== null ? '/' : '/login'}
-							className="flex flex-col justify-evenly items-center w-24 text-neutral-400 hover:text-white"
-						>
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path
-									d="M20 18C20 19.6569 16.4183 21 12 21C7.58172 21 4 19.6569 4 18C4 16.3431 7.58172 15 12 15C16.4183 15 20 16.3431 20 18Z"
-									stroke="currentColor"
-									strokeWidth="1.5"
-								/>
-								<path
-									d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-									stroke="currentColor"
-									strokeWidth="1.5"
-								/>
-							</svg>
-							{token !== '' && token !== null ? 'Logout' : 'Login'}
-						</a>
+						{token !== '' && token !== null ? (
+							<button
+								onClick={handleLogout}
+								className="flex flex-col justify-evenly items-center w-24 text-neutral-400 hover:text-white"
+							>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M20 18C20 19.6569 16.4183 21 12 21C7.58172 21 4 19.6569 4 18C4 16.3431 7.58172 15 12 15C16.4183 15 20 16.3431 20 18Z"
+										stroke="currentColor"
+										strokeWidth="1.5"
+									/>
+									<path
+										d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+										stroke="currentColor"
+										strokeWidth="1.5"
+									/>
+								</svg>
+								Logout
+							</button>
+						) : (
+							<Link
+								href="/login"
+								className="flex flex-col justify-evenly items-center w-24 text-neutral-400 hover:text-white"
+							>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M20 18C20 19.6569 16.4183 21 12 21C7.58172 21 4 19.6569 4 18C4 16.3431 7.58172 15 12 15C16.4183 15 20 16.3431 20 18Z"
+										stroke="currentColor"
+										strokeWidth="1.5"
+									/>
+									<path
+										d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+										stroke="currentColor"
+										strokeWidth="1.5"
+									/>
+								</svg>
+								Login
+							</Link>
+						)}
 					</li>
 				</ul>
 			</nav>
