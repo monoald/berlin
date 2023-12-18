@@ -8,7 +8,7 @@ export async function GET(request: Request) {
 
 	if (!code) {
 		redirect(
-			`https://accounts.google.com/o/oauth2/v2/auth?response_type=code&redirect_uri=http://localhost:3000/api/auth/google&client_id=${process.env.GOOGLE_ID}&scope=openid%20email%20profile`,
+			`https://accounts.google.com/o/oauth2/v2/auth?response_type=code&redirect_uri=https://berlin-ai.vercel.app/api/auth/google&client_id=${process.env.GOOGLE_ID}&scope=openid%20email%20profile`,
 		)
 	}
 	const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
@@ -20,7 +20,7 @@ export async function GET(request: Request) {
 		body: JSON.stringify({
 			clientId: process.env.GOOGLE_ID,
 			clientSecret: process.env.GOOGLE_SECRET,
-			redirect_uri: 'http://localhost:3000/api/auth/google',
+			redirect_uri: 'https://berlin-ai.vercel.app/api/auth/google',
 			code: code,
 			grant_type: 'authorization_code',
 		}),

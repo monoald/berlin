@@ -8,7 +8,7 @@ export async function GET(request: Request) {
 
 	if (!code) {
 		redirect(
-			`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_ID}&scope=read%3Auser%20user%20user%3Aemail&redirect_uri=http://localhost:3000/api/auth/github`,
+			`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_ID}&scope=read%3Auser%20user%20user%3Aemail&redirect_uri=https://berlin-ai.vercel.app/api/auth/github`,
 		)
 	}
 	const tokenRes = await fetch('https://github.com/login/oauth/access_token', {
