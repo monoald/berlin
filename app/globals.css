@@ -33,7 +33,7 @@ body {
 	@apply relative text-white rounded-lg flex flex-col justify-center items-center gap-12 text-center bg-neutral-800 hover:before:opacity-100;
 }
 .card {
-	@apply w-52 h-52;
+	@apply w-52 h-44 sm:h-52 max-w-[190px] sm:max-w-none mx-auto sm:mx-0;
 }
 .glow::before,
 .glow::after {
@@ -80,7 +80,7 @@ body {
 	height: calc(100% - 2px);
 }
 .card-info-wrapper {
-	@apply w-full h-full text-neutral-300 px-8 flex flex-col justify-center items-center gap-10;
+	@apply w-full h-full min-w-[148px] text-neutral-300 px-4 sm:px-8 flex flex-col justify-center items-center gap-2 sm:gap-10 text-sm sm:text-base;
 }
 
 .hidden:checked + p {

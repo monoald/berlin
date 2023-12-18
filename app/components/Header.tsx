@@ -28,7 +28,7 @@ export default function Header() {
 	return (
 		<header className="fixed bottom-6 w-full h-fit z-10">
 			<nav className="glow header max-w-fit h-[70px] mx-auto">
-				<ul className="glow-content flex justify-around items-center px-4 gap-12">
+				<ul className="glow-content flex justify-around items-center px-4 gap-4 sm:gap-12">
 					<li>
 						<a className="flex flex-col justify-evenly items-center w-24 text-neutral-400 hover:text-white" href="/">
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

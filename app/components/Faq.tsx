@@ -5,7 +5,7 @@ type Props = {
 
 export default function Faq({ question, answer }: Props) {
 	return (
-		<li className="faq glow w-full p-[1px] h-fit">
+		<li className="faq glow w-full mx-auto p-[1px] h-fit">
 			<details className="w-full rounded-lg bg-[#0d0d0d] text-start z-[1]">
 				<summary className="p-5 flex justify-between list-none">
 					{question}
