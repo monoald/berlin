@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<body
-				className={`${inter.className} bg-[#030301] relative after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:backdrop-blur-3xl after:z-[-1] after:pointer-events-none`}
+				className={`bg-[#030301] relative after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:backdrop-blur-3xl after:z-[-1] after:pointer-events-none`}
 			>
 				{children}
 			</body>
