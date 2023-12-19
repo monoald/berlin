@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 import Header from '../components/Header'
 
 export const metadata: Metadata = {
-	title: 'Privacy Policy',
-	description: 'Privacy policy of Berlin AI',
+	title: 'Terms of Use',
+	description: 'Terms of use of Berlin AI',
 }
 
 export default function PrivacyPolicy() {
