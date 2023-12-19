@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Form from './components/Form'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
+import Header from '../components/Header'
 
 const STEPS = {
 	INITIAL: 'INITIAL',
@@ -119,6 +120,7 @@ export default function Playground() {
 
 	return (
 		<div className="grid grid-cols-[282px_1fr]">
+			<Header />
 			<aside className="sticky top-0 min-h-screen max-h-[100vh] p-6 flex flex-col items-center gap-5 bg-[#0d0d0d] rounded-lg border border-neutral-800">
 				<header className="w-full pb-6 text-center border-b border-b-neutral-600">
 					<h1 className="mb-2 text-3xl font-semibold">

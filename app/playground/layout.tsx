@@ -23,16 +23,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 	if (token === '') {
 		return (
-			<html>
-				<head>
-					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-					<meta name="description" content="Generate webapps with images." />
-					<title>Playground Berlin AI</title>
-				</head>
-				<div className="w-full h-screen grid place-items-center">
-					<div className="loader"></div>
-				</div>
-			</html>
+			<div className="w-full h-screen grid place-items-center">
+				<div className="loader"></div>
+			</div>
 		)
 	}
 

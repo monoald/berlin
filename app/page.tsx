@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { MouseEvent } from 'react'
 import Faq from './components/Faq'
 import Link from 'next/link'
+import Header from './components/Header'
 
 export default function Home() {
 	const handleMouseMove = (e: MouseEvent<HTMLElement, globalThis.MouseEvent>) => {
@@ -20,6 +21,7 @@ export default function Home() {
 
 	return (
 		<div id="cards" onMouseMove={handleMouseMove}>
+			<Header />
 			<main className="w-full max-w-6xl px-8 mx-auto overflow-x-hidden">
 				<Image
 					className="absolute top-10 right-2/4 translate-x-2/4 mx-auto"

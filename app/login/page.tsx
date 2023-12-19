@@ -2,6 +2,8 @@
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import Link from 'next/link'
+import { ChangeEvent, useState } from 'react'
 
 const NoSSR = dynamic(() => import('../components/Header'), { ssr: false })
 
@@ -37,12 +39,37 @@ const messageListener = async (e: MessageEvent) => {
 }
 
 export default function Login() {
+	const [accept, setAccept] = useState(false)
+	const [error, setError] = useState('')
+
+	const handleAccept = (e: ChangeEvent<HTMLInputElement>) => {
+		if (e.target.checked) {
+			setAccept(true)
+		} else {
+			setAccept(false)
+		}
+	}
+	const handleGithubLogin = () => {
+		if (accept) {
+			openPopUp('/api/auth/github', 'Github Login', messageListener)
+		} else {
+			setError('You must accept the Terms of use and Privacy policy to Login')
+		}
+	}
+	const handleGoogleLogin = () => {
+		if (accept) {
+			openPopUp('/api/auth/google', 'Google Login', messageListener)
+		} else {
+			setError('You must accept the Terms of use and Privacy policy to Login')
+		}
+	}
+
 	return (
 		<>
 			<div className="hidden md:grid w-2/4 h-full place-items-center">
 				<Image src="/astronaut-moon.webp" alt="astronaut" width={240} height={380} />
 			</div>
-			<div className="flex flex-col justify-center items-center w-full md:w-2/4 h-full border border-neutral-800 rounded-lg bg-[rgba(255,255,255,0.05)]">
+			<div className="flex flex-col justify-center items-center w-full md:w-2/4 h-full border border-neutral-800 rounded-lg bg-[rgba(255,255,255,0.05)] px-8">
 				<div className="flex flex-col justify-center items-center gap-4">
 					<figure className="mb-8">
 						<Image src="/berlin.png" alt="logo" width={140} height={90} />
@@ -50,7 +77,6 @@ export default function Login() {
 					<h2 className="text-3xl font-bold">Welcome Back!</h2>
 					<p className="text-sm text-neutral-400">Select your login method</p>
 				</div>
-
 				{/* <form className="flex flex-col gap-6 mt-8 mb-8">
 					<label className="flex flex-col gap-2 font-semibold" htmlFor="email">
 						Email
@@ -89,7 +115,7 @@ export default function Login() {
 
 				<div className="w-full my-12 flex flex-col justify-center gap-4">
 					<button
-						onClick={() => openPopUp('/api/auth/github', 'Github Login', messageListener)}
+						onClick={handleGithubLogin}
 						className="w-64 py-[10px] px-8 mx-auto border rounded-lg border-neutral-800 grid grid-cols-[1fr,24px] place-items-start gap-4 bg-[#0D1117]"
 					>
 						Login with Github
@@ -138,7 +164,7 @@ export default function Login() {
 						</svg>
 					</button>
 					<button
-						onClick={() => openPopUp('/api/auth/google', 'Google Login', messageListener)}
+						onClick={handleGoogleLogin}
 						className="w-64 py-[10px] px-8 mx-auto border rounded-lg border-neutral-800 grid grid-cols-[1fr,24px] place-items-start gap-4 bg-neutral-200 text-neutral-900"
 					>
 						Login with Google
@@ -176,6 +202,28 @@ export default function Login() {
 							</defs>
 						</svg>
 					</button>
+
+					<div className="w-fit flex justify-center items-center gap-4">
+						<input
+							className="w-5 h-5 relative appearance-none before:absolute before:inset-0 before:border before:rounded before:border-neutral-600 before:hover:border-primary before:checked:border-primary before:checked:bg-[url('/Check.svg')] before:checked:bg-center before:checked:bg-cover"
+							type="checkbox"
+							onChange={handleAccept}
+						/>
+						<p className="block text-xs w-fit text-neutral-400">
+							I agree to the{' '}
+							<Link className=" underline" href="/terms-of-use">
+								Terms of use
+							</Link>{' '}
+							and{' '}
+							<Link className=" underline" href="/privacy-policy">
+								Privacy policy
+							</Link>
+						</p>
+					</div>
+				</div>
+
+				<div className="h-10">
+					<p className="text-sm text-center text-red-500">{error}</p>
 				</div>
 
 				{/* <p className="text-xs text-neutral-400">
