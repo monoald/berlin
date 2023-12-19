@@ -13,6 +13,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
+			<head>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				<meta name="description" content="The Image to Code AI."></meta>
+				<title>Berlin AI</title>
+			</head>
 			<body
 				className={`bg-[#030301] relative after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:backdrop-blur-3xl after:z-[-1] after:pointer-events-none overflow-x-hidden max-w-full`}
 			>

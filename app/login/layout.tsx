@@ -3,7 +3,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 		<html lang="en">
 			<head>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<meta name="description" content="Login to Berlin, the AI app where you can convert images to code."></meta>
+				<meta name="description" content="Login to Berlin, the AI app where you can convert images to code." />
 				<title>Login</title>
 			</head>
 			<body>

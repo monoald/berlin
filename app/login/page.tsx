@@ -1,13 +1,7 @@
 'use client'
 
-import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-
-export const metadata: Metadata = {
-	title: 'Login',
-	description: 'Login to Berlin AI',
-}
 
 const NoSSR = dynamic(() => import('../components/Header'), { ssr: false })
 
