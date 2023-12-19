@@ -4,6 +4,12 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Form from './components/Form'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+	title: 'Playground Berlin AI',
+	description: 'Create webapps from images',
+}
 
 const STEPS = {
 	INITIAL: 'INITIAL',

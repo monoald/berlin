@@ -1,3 +1,10 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+	title: 'Privacy Policy',
+	description: 'Privacy policy of Berlin AI',
+}
+
 export default function PrivacyPolicy() {
 	return (
 		<article className="p-20">

@@ -3,6 +3,12 @@ import Image from 'next/image'
 import { MouseEvent } from 'react'
 import Faq from './components/Faq'
 import Link from 'next/link'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Berlin AI',
+  description: 'The Image to Code AI',
+}
 
 export default function Home() {
 	const handleMouseMove = (e: MouseEvent<HTMLElement, globalThis.MouseEvent>) => {
