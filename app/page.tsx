@@ -1,6 +1,5 @@
 'use client'
 import Image from 'next/image'
-import Header from './components/Header'
 import { MouseEvent } from 'react'
 import Faq from './components/Faq'
 import Link from 'next/link'
@@ -21,7 +20,6 @@ export default function Home() {
 
 	return (
 		<div id="cards" onMouseMove={handleMouseMove}>
-			<Header />
 			<main className="w-full max-w-6xl px-8 mx-auto overflow-x-hidden">
 				<Image
 					className="absolute top-10 right-2/4 translate-x-2/4 mx-auto"

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import Header from './components/Header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<body
 				className={`bg-[#030301] relative after:absolute after:top-0 after:bottom-0 after:left-0 after:right-0 after:backdrop-blur-3xl after:z-[-1] after:pointer-events-none overflow-x-hidden max-w-full`}
 			>
+				<Header />
 				{children}
 			</body>
 		</html>
